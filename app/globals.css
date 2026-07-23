@@ -1,197 +1,251 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=block');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*,
-*::before,
-*::after {
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* ── Root tokens ─────────────────────────────────────────────────────── */
 :root {
-  --bg: #0a0a0f;
-  --accent: #7c3aed;
-  --accent-light: #a855f7;
-  --accent-dim: #4c1d95;
-  --text: #e8e4f5;
-  --text-secondary: #9990b0;
-  --text-muted: #5a5070;
-  --card-bg: #0d0d0f;
-  --card-border: #2a2a2e;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
-
-  --card-radius: 12px;
-  --section-pad: 6rem 2rem;
-
-  /* grid bg */
-  --grid-color: rgba(124, 58, 237, 0.07);
-  --grid-size: 40px;
+  --neo-bg:        #FFFDF5;
+  --neo-ink:       #000000;
+  --neo-accent:    #FF6B6B;
+  --neo-secondary: #FFD93D;
+  --neo-muted:     #C4B5FD;
+  --neo-white:     #FFFFFF;
 }
 
+/* ── Base ────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
-  color: var(--text);
+  background-color: var(--neo-bg);
+  color: var(--neo-ink);
   font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 700;
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
+
+  /* Halftone dot texture on the page canvas */
+  background-image: radial-gradient(#000 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-attachment: fixed;
 }
 
-*,
-*:hover {
-  cursor: none !important;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #7c3aed33;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed66;
-}
-
+/* ── Selection ────────────────────────────────────────────────────────── */
 ::selection {
-  background: #7c3aed44;
-  color: #e8e4f5;
+  background: var(--neo-secondary);
+  color: var(--neo-ink);
 }
 
-/* gradient text — use on name only */
-.gradient-text {
-  background: linear-gradient(135deg, #e8e4f5 0%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* ── Scrollbar ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: var(--neo-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--neo-ink);
+  border: 2px solid var(--neo-bg);
 }
 
-/* single glow utility */
-.glow-accent {
-  box-shadow: 0 0 40px #7c3aed1a, 0 0 80px #7c3aed0d;
+/* ── Focus ring (accessibility) ───────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--neo-ink);
+  outline-offset: 3px;
 }
 
-.glass-card {
-  background: rgba(13, 13, 15, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(42, 42, 46, 0.7);
-  border-radius: var(--card-radius);
+/* ── Typography helpers ───────────────────────────────────────────────── */
+.neo-label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
-.glass-nav {
-  background: rgba(10, 10, 15, 0.85);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(42, 42, 46, 0.4);
+.neo-display {
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
 }
 
-/* slow, subtle orb — use max one per section */
-.orb {
-  border-radius: 50%;
-  filter: blur(90px);
-  position: absolute;
-  pointer-events: none;
-  animation: orbPulse 10s ease-in-out infinite;
+/* Text stroke outline for display headings */
+.neo-stroke {
+  -webkit-text-stroke: 3px #000;
+  color: transparent;
 }
 
-@keyframes orbPulse {
+/* ── Hard-shadow utilities (supplement Tailwind shadow-neo-*) ─────────── */
+.neo-shadow-sm  { box-shadow:  4px  4px 0 0 #000; }
+.neo-shadow-md  { box-shadow:  8px  8px 0 0 #000; }
+.neo-shadow-lg  { box-shadow: 12px 12px 0 0 #000; }
+.neo-shadow-xl  { box-shadow: 16px 16px 0 0 #000; }
+.neo-shadow-sm-w { box-shadow: 4px 4px 0 0 #fff; }
+.neo-shadow-md-w { box-shadow: 8px 8px 0 0 #fff; }
 
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.2;
-  }
-
-  50% {
-    transform: scale(1.08);
-    opacity: 0.35;
-  }
+/* ── Card — the base brutalist block ─────────────────────────────────── */
+.neo-card {
+  background: var(--neo-white);
+  border: 4px solid var(--neo-ink);
+  box-shadow: 8px 8px 0 0 var(--neo-ink);
+  border-radius: 0;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
 }
 
-.section-base {
-  min-height: 100vh;
+.neo-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 11px 11px 0 0 var(--neo-ink);
+}
+
+/* ── Button ──────────────────────────────────────────────────────────── */
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 4px solid var(--neo-ink);
+  box-shadow: 4px 4px 0 0 var(--neo-ink);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  transition: transform 100ms ease-out, box-shadow 100ms ease-out;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.neo-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--neo-ink);
+}
+
+.neo-btn:active,
+.neo-btn-pressed {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.neo-btn-primary   { background: var(--neo-accent);    color: var(--neo-ink); }
+.neo-btn-secondary { background: var(--neo-secondary); color: var(--neo-ink); }
+.neo-btn-muted     { background: var(--neo-muted);     color: var(--neo-ink); }
+.neo-btn-outline   { background: var(--neo-white);     color: var(--neo-ink); }
+.neo-btn-black     { background: var(--neo-ink);       color: var(--neo-white); box-shadow: 4px 4px 0 0 #555; }
+.neo-btn-black:hover { box-shadow: 6px 6px 0 0 #555; }
+
+/* ── Tag pill ────────────────────────────────────────────────────────── */
+.neo-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 2px solid var(--neo-ink);
+  padding: 0.15rem 0.55rem;
+  border-radius: 0;
+  background: var(--neo-secondary);
+  color: var(--neo-ink);
+}
+
+/* ── Badge (rotated sticker) ─────────────────────────────────────────── */
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 3px solid var(--neo-ink);
+  box-shadow: 3px 3px 0 0 var(--neo-ink);
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  background: var(--neo-accent);
+  color: var(--neo-ink);
+}
+
+/* ── Section ─────────────────────────────────────────────────────────── */
+.neo-section {
   width: 100%;
-  padding: var(--section-pad);
+  padding: 5rem 1.5rem;
   position: relative;
-  overflow: hidden;
+  border-top: 4px solid var(--neo-ink);
 }
 
-.hover-lift {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease;
+/* Section background variants */
+.neo-section-cream     { background-color: var(--neo-bg); }
+.neo-section-yellow    { background-color: var(--neo-secondary); }
+.neo-section-muted     { background-color: var(--neo-muted); }
+.neo-section-black     { background-color: var(--neo-ink);   color: var(--neo-white); }
+.neo-section-accent    { background-color: var(--neo-accent); }
+
+/* Graph-paper texture overlay (apply to section inner) */
+.neo-graph {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
 }
 
-.hover-lift:hover {
-  transform: translateY(-4px);
-  border-color: rgba(124, 58, 237, 0.35);
+/* ── Marquee ─────────────────────────────────────────────────────────── */
+.neo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
 }
 
-.tech-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: var(--text-xs);
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid rgba(124, 58, 237, 0.22);
-  color: #a855f7;
-  letter-spacing: 0.04em;
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.masonry-grid {
+/* ── Masonry ─────────────────────────────────────────────────────────── */
+.neo-masonry {
   columns: 3;
   column-gap: 1.25rem;
 }
-
-.masonry-grid-item {
+.neo-masonry-item {
   break-inside: avoid;
   margin-bottom: 1.25rem;
 }
 
-@media (max-width: 1024px) {
-  .masonry-grid {
-    columns: 2;
-  }
+@media (max-width: 1024px) { .neo-masonry { columns: 2; } }
+@media (max-width: 640px)  { .neo-masonry { columns: 1; } }
+
+/* ── Sticker card (hero photo) ────────────────────────────────────────── */
+.sticker-card {
+  background: var(--neo-white);
+  border: 4px solid var(--neo-ink);
+  box-shadow: 10px 10px 0 0 var(--neo-ink);
+  border-radius: 0;
+  rotate: -2deg;
+  transition: rotate 150ms ease-out, box-shadow 150ms ease-out, translate 150ms ease-out;
 }
 
-@media (max-width: 640px) {
-  .masonry-grid {
-    columns: 1;
-  }
+.sticker-card:hover {
+  rotate: 2deg;
+  translate: -4px -4px;
+  box-shadow: 14px 14px 0 0 var(--neo-ink);
 }
 
-/* splash cursor */
-#fluid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  width: 100vw;
-  height: 100vh;
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .neo-marquee-track,
+  .animate-spin-slow,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none;
+  }
+  .neo-card,
+  .neo-btn,
+  .sticker-card {
+    transition: none;
+  }
 }

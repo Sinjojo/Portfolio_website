@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { SectionWrapper, fadeUpVariants } from "./SectionWrapper";
 
-// Art pieces with different heights for masonry
 const artPieces = [
   {
     id: "art-1",
@@ -11,9 +10,8 @@ const artPieces = [
     medium: "Digital / Generative",
     year: "2024",
     height: "h-56",
-    gradient: "from-violet-900 via-purple-800 to-fuchsia-900",
-    accent: "#a855f7",
-    svgMotif: "circuit",
+    bg: "var(--neo-muted)",
+    svgType: "circuit",
   },
   {
     id: "art-2",
@@ -21,9 +19,8 @@ const artPieces = [
     medium: "Pixel Art",
     year: "2024",
     height: "h-80",
-    gradient: "from-indigo-900 via-blue-900 to-cyan-900",
-    accent: "#06b6d4",
-    svgMotif: "grid",
+    bg: "var(--neo-secondary)",
+    svgType: "grid",
   },
   {
     id: "art-3",
@@ -31,9 +28,9 @@ const artPieces = [
     medium: "3D Render / Blender",
     year: "2023",
     height: "h-48",
-    gradient: "from-slate-900 via-gray-900 to-zinc-900",
-    accent: "#6b7280",
-    svgMotif: "dots",
+    bg: "var(--neo-ink)",
+    svgType: "dots",
+    onDark: true,
   },
   {
     id: "art-4",
@@ -41,9 +38,8 @@ const artPieces = [
     medium: "Generative / p5.js",
     year: "2024",
     height: "h-72",
-    gradient: "from-rose-900 via-pink-900 to-fuchsia-900",
-    accent: "#ec4899",
-    svgMotif: "wave",
+    bg: "var(--neo-accent)",
+    svgType: "wave",
   },
   {
     id: "art-5",
@@ -51,9 +47,8 @@ const artPieces = [
     medium: "AI-Assisted / Stable Diffusion",
     year: "2024",
     height: "h-64",
-    gradient: "from-emerald-900 via-teal-900 to-cyan-900",
-    accent: "#10b981",
-    svgMotif: "hex",
+    bg: "var(--neo-secondary)",
+    svgType: "hex",
   },
   {
     id: "art-6",
@@ -61,19 +56,18 @@ const artPieces = [
     medium: "ASCII Art / Code",
     year: "2023",
     height: "h-52",
-    gradient: "from-orange-900 via-amber-900 to-yellow-900",
-    accent: "#f59e0b",
-    svgMotif: "glitch",
+    bg: "var(--neo-ink)",
+    svgType: "glitch",
+    onDark: true,
   },
   {
     id: "art-7",
     title: "Binary Bloom",
     medium: "Shader / GLSL",
     year: "2024",
-    height: "h-88",
-    gradient: "from-purple-900 via-violet-900 to-indigo-900",
-    accent: "#8b5cf6",
-    svgMotif: "circuit",
+    height: "h-80",
+    bg: "var(--neo-muted)",
+    svgType: "circuit",
   },
   {
     id: "art-8",
@@ -81,87 +75,65 @@ const artPieces = [
     medium: "Procreate / iPad",
     year: "2023",
     height: "h-60",
-    gradient: "from-blue-900 via-indigo-900 to-purple-900",
-    accent: "#3b82f6",
-    svgMotif: "grid",
+    bg: "var(--neo-accent)",
+    svgType: "wave",
   },
 ];
 
-// Abstract SVG background motifs
-function SvgMotif({ type, accent }: { type: string; accent: string }) {
-  if (type === "circuit") {
-    return (
-      <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 200 200">
-        <path d="M20,100 h40 v-40 h40 v40 h40 M100,60 v-40 M100,140 v40" stroke={accent} strokeWidth="1.5" fill="none" />
-        <circle cx="100" cy="100" r="4" fill={accent} />
-        <circle cx="60" cy="60" r="3" fill={accent} />
-        <circle cx="140" cy="100" r="3" fill={accent} />
-        <circle cx="100" cy="20" r="2.5" fill={accent} />
-        <path d="M20,140 h20 v20" stroke={accent} strokeWidth="1" fill="none" opacity="0.6" />
-        <path d="M180,60 h-20 v-20" stroke={accent} strokeWidth="1" fill="none" opacity="0.6" />
-      </svg>
-    );
-  }
-  if (type === "grid") {
-    return (
-      <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 200 200">
-        {Array.from({ length: 5 }, (_, i) => (
-          <g key={i}>
-            <line x1={i * 50} y1="0" x2={i * 50} y2="200" stroke={accent} strokeWidth="0.5" />
-            <line x1="0" y1={i * 50} x2="200" y2={i * 50} stroke={accent} strokeWidth="0.5" />
-          </g>
-        ))}
-        <circle cx="100" cy="100" r="40" fill="none" stroke={accent} strokeWidth="1" />
-        <circle cx="100" cy="100" r="20" fill="none" stroke={accent} strokeWidth="0.5" />
-      </svg>
-    );
-  }
-  if (type === "wave") {
-    return (
-      <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 200 200">
-        {Array.from({ length: 6 }, (_, i) => (
-          <path
-            key={i}
-            d={`M0,${50 + i * 20} Q50,${30 + i * 20} 100,${50 + i * 20} T200,${50 + i * 20}`}
-            fill="none"
-            stroke={accent}
-            strokeWidth="0.8"
-            opacity={1 - i * 0.12}
-          />
-        ))}
-      </svg>
-    );
-  }
-  if (type === "hex") {
-    return (
-      <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 200 200">
-        {[{ x: 100, y: 100, r: 50 }, { x: 60, y: 60, r: 25 }, { x: 140, y: 140, r: 25 }, { x: 150, y: 60, r: 20 }].map((hex, i) => (
-          <polygon
-            key={i}
-            points={Array.from({ length: 6 }, (_, j) => {
-              const a = (j * 60 - 30) * Math.PI / 180;
-              return `${hex.x + hex.r * Math.cos(a)},${hex.y + hex.r * Math.sin(a)}`;
-            }).join(" ")}
-            fill="none"
-            stroke={accent}
-            strokeWidth="0.8"
-          />
-        ))}
-      </svg>
-    );
-  }
+function SvgMotif({ type, onDark }: { type: string; onDark?: boolean }) {
+  const stroke = onDark ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.2)";
+  const fill   = onDark ? "rgba(255,255,255,0.2)"  : "rgba(0,0,0,0.15)";
+
+  if (type === "circuit") return (
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+      <path d="M20,100 h40 v-40 h40 v40 h40 M100,60 v-40 M100,140 v40" stroke={stroke} strokeWidth="2" fill="none" />
+      <circle cx="100" cy="100" r="5" fill={fill} />
+      <circle cx="60" cy="60" r="4" fill={fill} />
+      <circle cx="140" cy="100" r="4" fill={fill} />
+    </svg>
+  );
+  if (type === "grid") return (
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+      {Array.from({ length: 5 }, (_, i) => (
+        <g key={i}>
+          <line x1={i * 50} y1="0" x2={i * 50} y2="200" stroke={stroke} strokeWidth="1" />
+          <line x1="0" y1={i * 50} x2="200" y2={i * 50} stroke={stroke} strokeWidth="1" />
+        </g>
+      ))}
+      <circle cx="100" cy="100" r="45" fill="none" stroke={stroke} strokeWidth="2" />
+    </svg>
+  );
+  if (type === "wave") return (
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+      {Array.from({ length: 6 }, (_, i) => (
+        <path
+          key={i}
+          d={`M0,${50 + i * 22} Q50,${28 + i * 22} 100,${50 + i * 22} T200,${50 + i * 22}`}
+          fill="none" stroke={stroke} strokeWidth="1.5"
+        />
+      ))}
+    </svg>
+  );
+  if (type === "hex") return (
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+      {[{ x: 100, y: 100, r: 55 }, { x: 60, y: 60, r: 28 }, { x: 145, y: 145, r: 28 }].map((h, i) => (
+        <polygon
+          key={i}
+          points={Array.from({ length: 6 }, (_, j) => {
+            const a = (j * 60 - 30) * Math.PI / 180;
+            return `${h.x + h.r * Math.cos(a)},${h.y + h.r * Math.sin(a)}`;
+          }).join(" ")}
+          fill="none" stroke={stroke} strokeWidth="1.5"
+        />
+      ))}
+    </svg>
+  );
   // dots / default
   return (
-    <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 200 200">
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
       {Array.from({ length: 6 }, (_, row) =>
         Array.from({ length: 6 }, (_, col) => (
-          <circle
-            key={`${row}-${col}`}
-            cx={20 + col * 32}
-            cy={20 + row * 32}
-            r="2"
-            fill={accent}
-          />
+          <circle key={`${row}-${col}`} cx={18 + col * 34} cy={18 + row * 34} r="3" fill={fill} />
         ))
       )}
     </svg>
@@ -170,86 +142,75 @@ function SvgMotif({ type, accent }: { type: string; accent: string }) {
 
 export function ArtSection() {
   return (
-    <SectionWrapper id="art" label="// 04. creative works" className="bg-gradient-to-b from-bg to-[#0c0c14]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+    <SectionWrapper id="art" className="neo-section-black">
+      <div className="mx-auto max-w-7xl">
+        {/* ── Header ── */}
+        <motion.div variants={fadeUpVariants} className="mb-14">
+          <span className="neo-label text-xs mb-3 block text-neo-white opacity-60">04 / Creative Works</span>
+          <h2
+            className="neo-display text-[clamp(3rem,8vw,6rem)] uppercase text-neo-white"
+            style={{ display: "inline-block" }}
+          >
+            Art
+          </h2>
+          <p className="mt-4 text-xl font-bold max-w-lg text-neo-white opacity-70">
+            Generative, pixel, and 3D art — exploring code as a creative medium.
+          </p>
+        </motion.div>
 
-      {/* Section header */}
-      <motion.div variants={fadeUpVariants} className="mb-12 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-black lg:text-5xl">
-          <span className="gradient-text">Art</span>
-        </h2>
-        <p className="mt-3 text-text-secondary max-w-lg">
-          Generative, pixel, and 3D art — exploring the aesthetics of code as a creative medium.
-        </p>
-      </motion.div>
-
-      {/* Masonry grid */}
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="masonry-grid">
+        {/* ── Masonry ── */}
+        <div className="neo-masonry">
           {artPieces.map((art, i) => (
             <motion.div
               key={art.id}
               variants={fadeUpVariants}
               custom={i}
-              className="masonry-grid-item"
+              className="neo-masonry-item"
             >
-              <motion.div
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                className={`group relative overflow-hidden rounded-2xl border border-card-border bg-gradient-to-br ${art.gradient} ${art.height}`}
+              <div
+                className={`group relative overflow-hidden border-4 border-neo-white ${art.height}
+                  hover:-translate-y-1 hover:shadow-neo-md-w
+                  transition-all duration-150`}
                 style={{
-                  boxShadow: "0 4px 30px rgba(0,0,0,0.4)",
+                  background: art.bg,
+                  boxShadow: "6px 6px 0 0 #fff",
                 }}
               >
-                {/* SVG Motif */}
-                <SvgMotif type={art.svgMotif} accent={art.accent} />
+                <SvgMotif type={art.svgType} onDark={art.onDark} />
 
-                {/* Animated center element */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center opacity-30"
-                  style={{
-                    background: `radial-gradient(circle at 50% 50%, ${art.accent}44 0%, transparent 70%)`,
-                  }}
-                />
-
-                {/* Hover overlay */}
-                <div
-                  className="absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-100"
-                  style={{
-                    background: `linear-gradient(135deg, ${art.accent}11 0%, transparent 60%)`,
-                    backdropFilter: "blur(1px)",
-                  }}
-                />
-
-                {/* Info overlay */}
-                <div className="absolute inset-x-0 bottom-0 translate-y-1 p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                {/* Info overlay — slides up on hover */}
+                <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-200 ease-out">
                   <div
-                    className="rounded-xl p-3"
-                    style={{
-                      background: "rgba(10,10,15,0.85)",
-                      backdropFilter: "blur(12px)",
-                      border: `1px solid ${art.accent}33`,
-                    }}
+                    className="p-3 border-t-4 border-neo-white"
+                    style={{ background: art.onDark ? "#fff" : "var(--neo-ink)" }}
                   >
-                    <h3 className="font-bold text-text text-sm">{art.title}</h3>
-                    <div className="mt-1 flex items-center justify-between">
-                      <span className="font-mono text-xs text-text-secondary">{art.medium}</span>
+                    <p
+                      className="font-black text-sm uppercase tracking-tight"
+                      style={{ color: art.onDark ? "var(--neo-ink)" : "#fff" }}
+                    >
+                      {art.title}
+                    </p>
+                    <div className="flex items-center justify-between mt-1">
                       <span
-                        className="font-mono text-xs px-2 py-0.5 rounded-sm"
-                        style={{ background: `${art.accent}22`, color: art.accent }}
+                        className="text-[10px] font-bold"
+                        style={{ color: art.onDark ? "var(--neo-ink)" : "rgba(255,255,255,0.7)" }}
+                      >
+                        {art.medium}
+                      </span>
+                      <span
+                        className="neo-label text-[9px] border-2 px-1.5 py-0.5"
+                        style={{
+                          borderColor: art.onDark ? "var(--neo-ink)" : "#fff",
+                          background:  art.onDark ? "var(--neo-secondary)" : "var(--neo-accent)",
+                          color: "var(--neo-ink)",
+                        }}
                       >
                         {art.year}
                       </span>
                     </div>
                   </div>
                 </div>
-
-                {/* Top accent border glow on hover */}
-                <div
-                  className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{ background: `linear-gradient(90deg, transparent, ${art.accent}, transparent)` }}
-                />
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>

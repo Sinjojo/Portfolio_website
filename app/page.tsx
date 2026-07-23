@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 
 export default function HomePage() {
   return (
-    <main className="noise scanlines relative min-h-screen">
+    <main className="relative min-h-screen bg-neo-bg">
       <Navbar />
       <HeroSection />
       <ProjectsSection />

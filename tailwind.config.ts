@@ -9,51 +9,40 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0a0a0f",
-        accent: "#7c3aed",
-        "accent-light": "#a855f7",
-        "accent-dim": "#4c1d95",
-        text: "#e8e4f5",
-        "text-secondary": "#9990b0",
-        "card-bg": "#0d0d0f",
-        "card-border": "#2a2a2e",
-        "card-hover": "#13131a",
+        // Neo-brutalism palette
+        neo: {
+          bg: "#FFFDF5",       // cream / aged paper
+          ink: "#000000",       // pure black — all borders, text, shadows
+          accent: "#FF6B6B",    // hot red
+          secondary: "#FFD93D", // vivid yellow
+          muted: "#C4B5FD",     // soft violet
+          white: "#FFFFFF",
+        },
       },
       fontFamily: {
         sans: ["Space Grotesk", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "purple-glow": "radial-gradient(ellipse at center, #7c3aed33 0%, transparent 70%)",
+      boxShadow: {
+        "neo-sm":  "4px 4px 0px 0px #000000",
+        "neo-md":  "8px 8px 0px 0px #000000",
+        "neo-lg":  "12px 12px 0px 0px #000000",
+        "neo-xl":  "16px 16px 0px 0px #000000",
+        "neo-sm-w": "4px 4px 0px 0px #FFFFFF",
+        "neo-md-w": "8px 8px 0px 0px #FFFFFF",
       },
       animation: {
-        "orb-pulse": "orbPulse 4s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 2.5s linear infinite",
-        "glow-pulse": "glowPulse 2s ease-in-out infinite",
+        "spin-slow": "spin-slow 10s linear infinite",
+        "marquee":   "marquee 25s linear infinite",
       },
       keyframes: {
-        orbPulse: {
-          "0%, 100%": { transform: "scale(1)", opacity: "0.6" },
-          "50%": { transform: "scale(1.1)", opacity: "0.9" },
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to:   { transform: "rotate(360deg)" },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-12px)" },
+        marquee: {
+          "0%":   { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% center" },
-          "100%": { backgroundPosition: "200% center" },
-        },
-        glowPulse: {
-          "0%, 100%": { boxShadow: "0 0 20px #7c3aed44, 0 0 60px #7c3aed22" },
-          "50%": { boxShadow: "0 0 40px #7c3aed88, 0 0 80px #7c3aed44" },
-        },
-      },
-      backdropBlur: {
-        xs: "2px",
       },
     },
   },

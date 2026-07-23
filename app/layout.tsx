@@ -1,28 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { DragonCursor } from "@/components/DragonCursor";
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
+  weight: ["400", "500", "700"],
+  display: "block",
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Dark Fantasy Developer",
+  title: "Portfolio | Developer & Maker",
   description:
-    "A cyberpunk dark-fantasy portfolio showcasing projects, hardware, blogs, and digital art. Built with Next.js and creativity.",
-  keywords: ["portfolio", "developer", "cyberpunk", "dark fantasy", "projects"],
+    "Personal portfolio showcasing projects, hardware builds, technical blogs, and digital art.",
+  keywords: ["portfolio", "developer", "hardware", "maker", "projects"],
   openGraph: {
-    title: "Portfolio | Dark Fantasy Developer",
-    description: "Cyberpunk dark-fantasy developer portfolio",
+    title: "Portfolio | Developer & Maker",
+    description: "Developer & maker portfolio",
     type: "website",
   },
 };
@@ -34,10 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-bg text-text antialiased`}
-      >
-        <DragonCursor />
+      <body className={spaceGrotesk.className}>
         {children}
       </body>
     </html>

@@ -7,22 +7,21 @@ interface SectionWrapperProps {
   id: string;
   children: React.ReactNode;
   className?: string;
-  label?: string;
 }
 
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.12 },
+    transition: { staggerChildren: 0.1 },
   },
 };
 
 export const fadeUpVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" as const },
+    transition: { duration: 0.45, ease: "easeOut" as const },
   },
 };
 
@@ -30,10 +29,9 @@ export function SectionWrapper({
   id,
   children,
   className = "",
-  label,
 }: SectionWrapperProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true, margin: "-8%" });
 
   return (
     <motion.section
@@ -42,18 +40,8 @@ export function SectionWrapper({
       variants={containerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={`section-base ${className}`}
+      className={`neo-section ${className}`}
     >
-      {label && (
-        <motion.div
-          variants={fadeUpVariants}
-          className="mb-16 text-center"
-        >
-          <span className="font-mono text-xs text-accent tracking-widest uppercase">
-            {label}
-          </span>
-        </motion.div>
-      )}
       {children}
     </motion.section>
   );

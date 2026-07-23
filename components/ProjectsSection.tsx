@@ -8,163 +8,167 @@ const projects = [
   {
     id: "proj-1",
     title: "NeuralForge",
-    description:
-      "An AI-powered code generation platform with real-time collaboration and intelligent refactoring suggestions.",
+    description: "AI-powered code generation platform with real-time collaboration and intelligent refactoring.",
     tags: ["Next.js", "Python", "LLM", "WebSocket"],
-    status: "Live",
-    statusColor: "#4ade80",
+    status: "LIVE",
+    statusBg: "#86efac",   // soft green
     github: "#",
     live: "#",
-    gradient: "from-violet-900/40 to-purple-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "var(--neo-accent)",
   },
   {
     id: "proj-2",
     title: "CryptoNexus",
-    description:
-      "DeFi dashboard with real-time chain analytics, whale tracking, and portfolio risk scoring.",
+    description: "DeFi dashboard with real-time chain analytics, whale tracking, and portfolio risk scoring.",
     tags: ["React", "Web3.js", "Rust", "Kafka"],
-    status: "Beta",
-    statusColor: "#fb923c",
+    status: "BETA",
+    statusBg: "#fde68a",   // amber
     github: "#",
     live: "#",
-    gradient: "from-indigo-900/40 to-blue-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "var(--neo-secondary)",
   },
   {
     id: "proj-3",
     title: "ShadowOS",
-    description:
-      "Minimal Linux distro built from scratch with custom init system, package manager, and tiling WM.",
+    description: "Minimal Linux distro built from scratch — custom init system, package manager, and tiling WM.",
     tags: ["C", "Shell", "POSIX", "Assembly"],
-    status: "Open Source",
-    statusColor: "#a855f7",
+    status: "OPEN SOURCE",
+    statusBg: "var(--neo-muted)",
     github: "#",
     live: null,
-    gradient: "from-slate-900/60 to-gray-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "var(--neo-muted)",
   },
   {
     id: "proj-4",
     title: "GlyphEngine",
-    description:
-      "Real-time 3D procedural world generator using WebGPU with dynamic biome simulation.",
+    description: "Real-time 3D procedural world generator using WebGPU with dynamic biome simulation.",
     tags: ["WebGPU", "TypeScript", "WGSL", "WASM"],
     status: "WIP",
-    statusColor: "#facc15",
+    statusBg: "var(--neo-secondary)",
     github: "#",
     live: "#",
-    gradient: "from-teal-900/30 to-emerald-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "var(--neo-secondary)",
   },
   {
     id: "proj-5",
     title: "Velvet CMS",
-    description:
-      "A headless CMS with visual schema builder, AI content suggestions, and multi-tenant support.",
+    description: "Headless CMS with visual schema builder, AI content suggestions, and multi-tenant support.",
     tags: ["Go", "PostgreSQL", "React", "gRPC"],
-    status: "Live",
-    statusColor: "#4ade80",
+    status: "LIVE",
+    statusBg: "#86efac",
     github: "#",
     live: "#",
-    gradient: "from-rose-900/30 to-pink-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "var(--neo-accent)",
   },
   {
     id: "proj-6",
     title: "DeepGraph",
-    description:
-      "Graph neural network framework for social network analysis and anomaly detection at scale.",
+    description: "Graph neural network framework for social network analysis and anomaly detection at scale.",
     tags: ["Python", "PyTorch", "Neo4j", "FastAPI"],
-    status: "Research",
-    statusColor: "#60a5fa",
+    status: "RESEARCH",
+    statusBg: "#bfdbfe",   // light blue
     github: "#",
     live: null,
-    gradient: "from-purple-900/40 to-fuchsia-900/20",
+    cardBg: "#FFFFFF",
+    accentLine: "#bfdbfe",
   },
 ];
 
 export function ProjectsSection() {
   return (
-    <SectionWrapper id="projects" label="// 01. featured work">
-      {/* Section header */}
-      <motion.div variants={fadeUpVariants} className="mb-12 max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-black lg:text-5xl">
-          <span className="gradient-text">Projects</span>
-        </h2>
-        <p className="mt-3 text-text-secondary max-w-lg">
-          A selection of things I&apos;ve built — from AI systems to bare-metal software.
-        </p>
-      </motion.div>
-
-      {/* Cards grid */}
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, i) => (
-          <motion.div
-            key={project.id}
-            variants={fadeUpVariants}
-            custom={i}
-            className={`hover-lift glass-card group relative overflow-hidden rounded-2xl bg-gradient-to-br ${project.gradient} p-6`}
+    <SectionWrapper id="projects" className="neo-section-cream">
+      <div className="mx-auto max-w-7xl">
+        {/* ── Header ── */}
+        <motion.div variants={fadeUpVariants} className="mb-14">
+          <span className="neo-label text-xs mb-3 block">01 / Featured Work</span>
+          <h2
+            className="neo-display text-[clamp(3rem,8vw,6rem)] uppercase"
+            style={{ rotate: "-1deg", display: "inline-block" }}
           >
-            {/* Corner accent */}
-            <div className="absolute right-0 top-0 h-16 w-16 overflow-hidden">
-              <div className="absolute right-0 top-0 h-px w-full origin-right bg-accent/30 rotate-45 translate-x-2 -translate-y-px" />
-            </div>
+            Projects
+          </h2>
+          <p className="mt-4 text-xl font-bold max-w-lg">
+            A selection of things I&apos;ve built — from AI systems to bare-metal software.
+          </p>
+        </motion.div>
 
-            {/* Status badge */}
-            <div className="mb-4 flex items-center justify-between">
-              <span
-                className="flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                style={{
-                  background: `${project.statusColor}18`,
-                  border: `1px solid ${project.statusColor}44`,
-                  color: project.statusColor,
-                }}
-              >
-                <span
-                  className="h-1.5 w-1.5 rounded-full animate-pulse"
-                  style={{ background: project.statusColor }}
-                />
-                {project.status}
-              </span>
-              <div className="flex gap-2">
-                <a
-                  href={project.github}
-                  aria-label="GitHub"
-                  className="rounded-lg p-1.5 text-text-secondary transition-colors hover:text-text"
-                >
-                  <GithubIcon size={15} />
-                </a>
-                {project.live && (
-                  <a
-                    href={project.live}
-                    aria-label="Live demo"
-                    className="rounded-lg p-1.5 text-text-secondary transition-colors hover:text-accent"
+        {/* ── Cards ── */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.id}
+              variants={fadeUpVariants}
+              custom={i}
+              className="neo-card group flex flex-col p-0 overflow-hidden"
+            >
+              {/* Coloured top stripe */}
+              <div
+                className="h-2 w-full border-b-4 border-neo-ink"
+                style={{ background: project.accentLine }}
+              />
+
+              <div className="flex flex-col flex-1 p-5 gap-4">
+                {/* Status + links row */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="neo-label text-[10px] px-2 py-1 border-2 border-neo-ink"
+                    style={{ background: project.statusBg }}
                   >
-                    <ExternalLinkIcon size={15} />
-                  </a>
-                )}
+                    {project.status}
+                  </span>
+                  <div className="flex gap-2">
+                    <a
+                      href={project.github}
+                      aria-label="GitHub"
+                      className="flex items-center justify-center w-8 h-8 border-2 border-neo-ink bg-neo-white shadow-neo-sm
+                                 hover:bg-neo-secondary hover:-translate-x-0.5 hover:-translate-y-0.5
+                                 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none
+                                 transition-all duration-100"
+                    >
+                      <GithubIcon size={14} />
+                    </a>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        aria-label="Live demo"
+                        className="flex items-center justify-center w-8 h-8 border-2 border-neo-ink bg-neo-accent shadow-neo-sm
+                                   hover:-translate-x-0.5 hover:-translate-y-0.5
+                                   active:translate-x-0.5 active:translate-y-0.5 active:shadow-none
+                                   transition-all duration-100"
+                      >
+                        <ExternalLinkIcon size={14} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-black uppercase tracking-tight leading-tight">
+                  {project.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm font-bold leading-relaxed flex-1 opacity-75">
+                  {project.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t-2 border-neo-ink">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="neo-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="mb-2 text-xl font-bold text-text group-hover:gradient-text transition-all duration-300">
-              {project.title}
-            </h3>
-
-            {/* Description */}
-            <p className="mb-4 text-sm leading-relaxed text-text-secondary">
-              {project.description}
-            </p>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span key={tag} className="tech-tag">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Bottom glow on hover */}
-            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   );
