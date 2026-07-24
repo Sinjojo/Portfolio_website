@@ -129,7 +129,7 @@ export function HeroSection() {
               style={{ boxShadow: "5px 5px 0 0 #000", rotate: "-1deg" }}
             >
               <p className="neo-label text-sm text-neo-ink">
-                AI & Data Science student , enthusiast
+                AI & Data Science student, enthusiast.
               </p>
             </div>
           </motion.div>
