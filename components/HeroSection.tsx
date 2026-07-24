@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { StickerCard } from "./TiltCard";
 import { GithubIcon, XIcon, LinkedinIcon, MailIcon } from "./Icons";
-
+import Image from "next/image";
 const socials = [
   { icon: GithubIcon, label: "GitHub", href: "https://github.com" },
   { icon: XIcon, label: "Twitter/X", href: "https://twitter.com" },
   { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com" },
-  { icon: MailIcon, label: "Email", href: "mailto:hello@example.com" },
+  { icon: MailIcon, label: "Email", href: "salankrmx@gmail.com" },
 ];
 
 const container = {
@@ -61,17 +61,19 @@ export function HeroSection() {
               className="absolute inset-0 bg-neo-secondary border-4 border-neo-ink"
               style={{ translate: "12px 12px" }}
             />
+
             <StickerCard className="relative w-64 h-80 sm:w-72 sm:h-96">
-              {/* Photo placeholder */}
-              <div className="absolute inset-0 bg-neo-muted flex flex-col items-center justify-center gap-3 p-6">
-                <svg viewBox="0 0 100 100" className="h-24 w-24 text-neo-ink opacity-40" fill="currentColor">
-                  <circle cx="50" cy="34" r="20" />
-                  <ellipse cx="50" cy="80" rx="32" ry="22" />
-                </svg>
-                <span className="neo-label text-[10px] text-neo-ink opacity-60">your photo here</span>
+              <div className="absolute inset-0 overflow-hidden">
+                <Image
+                  src="/jojo.jpeg"
+                  alt="Jojo"
+                  fill
+                  className="object-cover"
+                  priority
+                />
               </div>
 
-              {/* Corner badge — rotated sticker */}
+              {/* Corner badge */}
               <div
                 className="absolute -top-5 -right-5 neo-badge bg-neo-accent rotate-12 z-10"
                 style={{ fontSize: "0.6rem" }}
@@ -127,7 +129,7 @@ export function HeroSection() {
               style={{ boxShadow: "5px 5px 0 0 #000", rotate: "-1deg" }}
             >
               <p className="neo-label text-sm text-neo-ink">
-                Full-Stack Developer &amp; Digital Craftsman
+                AI & Data Science student , enthusiast
               </p>
             </div>
           </motion.div>
@@ -137,8 +139,8 @@ export function HeroSection() {
             variants={item}
             className="text-xl font-bold leading-snug max-w-md"
           >
-            Building things at the intersection of art, engineering, and chaos.
-            No gradients. No blur. All structure.
+            Building things at the intersection of art, engineering and chaos.Make sure to drop a message.
+
           </motion.p>
 
           {/* Social icon buttons */}
@@ -194,7 +196,7 @@ export function HeroSection() {
         <div className="neo-marquee-track whitespace-nowrap">
           {Array.from({ length: 12 }).map((_, i) => (
             <span key={i} className="neo-label text-[11px] mx-6 text-neo-ink">
-              ✦ DEVELOPER ✦ MAKER ✦ BUILDER ✦ DESIGNER ✦ ENGINEER
+              ✦ DEVELOPER ✦ LEARNER ✦ BUILDER ✦ DESIGNER ✦ ENGINEER
             </span>
           ))}
         </div>
